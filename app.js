@@ -11,7 +11,8 @@ global.Campground = require('./models/campground');
 const index = require('./routes/index'),
     campgrounds = require('./routes/campgrounds'),
     campgroundspost = require('./routes/campgroundspost'),
-    newcampground = require('./routes/newcampground');
+    newcampground = require('./routes/newcampground'),
+    showcampground = require('./routes/showcampground');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/', index);
 app.use('/campgrounds', campgrounds);
 app.use('/campgrounds', campgroundspost);
 app.use('/campgrounds/new', newcampground);
+app.use('/campgrounds', showcampground);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
