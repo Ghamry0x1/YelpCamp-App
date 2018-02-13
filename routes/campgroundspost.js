@@ -6,9 +6,14 @@ router.post('/', function(req, res, next) {
     let name = req.body.name;
     let image = req.body.image;
     let newCamp = {name: name, image:image};
-    campgrounds.push(newCamp);
-    res.redirect('/campgrounds');
-    console.log(campgrounds.length);
+    Campground.create(newCamp, (err, newlyCreatedCamp) => {
+        if(err) {
+            console.log(err);
+        }
+        else {
+            res.redirect('/campgrounds');
+        }
+    });
 });
 
 module.exports = router;

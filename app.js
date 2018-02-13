@@ -4,7 +4,9 @@ const express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    db = require('./models/db');
+
+global.Campground = require('./models/campground');
 
 const index = require('./routes/index'),
     campgrounds = require('./routes/campgrounds'),
@@ -18,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,12 +31,6 @@ app.use('/', index);
 app.use('/campgrounds', campgrounds);
 app.use('/campgrounds', campgroundspost);
 app.use('/campgrounds/new', newcampground);
-
-global.campgrounds = [
-    {name: "Salmon Creek", image: "images/salmoncreek.jpg"},
-    {name: "Granite Hill", image: "images/granitehill.jpg"},
-    {name: "Mountain Goat's Rest", image: "images/mountaingoatsrest.jpg"}
-];
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
